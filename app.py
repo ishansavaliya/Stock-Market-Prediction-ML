@@ -95,7 +95,8 @@ end = '2022-12-31'
 
 # Try to download data with error handling
 try:
-    data = yf.download(stock, start, end)
+    # Explicitly set auto_adjust parameter and add error handling
+    data = yf.download(stock, start, end, auto_adjust=True, progress=False)
     if data.empty:
         st.error(f"No data found for {stock}. Please check the company name or symbol.")
         st.stop()

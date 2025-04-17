@@ -1,0 +1,43 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment directories
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*_env/
+
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large data files
+*.csv
+*.h5
+
+# Large model files (uncomment if you don't want to include these)
+# *.keras
+# *.joblib
+
+# Logs
+logs/
+*.log

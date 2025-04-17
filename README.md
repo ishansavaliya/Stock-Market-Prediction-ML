@@ -110,3 +110,19 @@ streamlit run app.py
 ```
 
 📈 **Invest Smarter with AI!** 📊
+
+
+---
+
+<img width="718" alt="Screenshot 2025-04-17 at 8 07 00 PM" src="https://github.com/user-attachments/assets/a2f04f0f-bf5d-4f48-a5d9-1d271c399a62" />   
+
+---
+
+<img width="718" alt="Screenshot 2025-04-17 at 8 07 17 PM" src="https://github.com/user-attachments/assets/2f19cc82-375f-4338-9aab-1e5b6047460a" />
+
+---
+
+<img width="718" alt="Screenshot 2025-04-17 at 8 07 24 PM" src="https://github.com/user-attachments/assets/9564fc58-9a18-4007-b8b7-1deb92b87954" />
+
+
+

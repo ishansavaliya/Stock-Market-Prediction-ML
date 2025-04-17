@@ -1,20 +1,28 @@
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from keras.models import load_model
+# Replace Keras import with joblib for loading scikit-learn models
+import joblib
 import streamlit as st
 import matplotlib.pyplot as plt
 import os
 import requests
 
-# Use a relative path that works on macOS
-model_path = 'Stock Predictions Model.keras'
+# Use scikit-learn model instead of Keras model
+model_path = 'gradient_boosting_stock_model.joblib'
 # Only load the model if the file exists
 if os.path.exists(model_path):
-    model = load_model(model_path)
+    model = joblib.load(model_path)
+    st.success(f"Model loaded from {model_path}")
 else:
-    st.error(f"Model file not found at {model_path}. Please train the model first using the notebook.")
-    model = None
+    # Try the random forest model as fallback
+    model_path = 'random_forest_stock_model.joblib'
+    if os.path.exists(model_path):
+        model = joblib.load(model_path)
+        st.success(f"Model loaded from {model_path}")
+    else:
+        st.error(f"No model files found. Please train models first.")
+        model = None
 
 st.header('Stock Market Predictor')
 
@@ -140,23 +148,25 @@ plt.title(f"{company_full_name} ({stock})")
 plt.show()
 st.pyplot(fig3)
 
-x = []
-y = []
-
-for i in range(100, data_test_scale.shape[0]):
-    x.append(data_test_scale[i-100:i])
-    y.append(data_test_scale[i,0])
-
-x,y = np.array(x), np.array(y)
-
 if model:
+    # Modified prediction section for scikit-learn models
+    x = []
+    for i in range(100, data_test_scale.shape[0]):
+        x.append(data_test_scale[i-100:i].flatten())  # Flatten for scikit-learn models
+    
+    x = np.array(x)
+    
+    # Use the scikit-learn model for prediction
     predict = model.predict(x)
-
-    scale = 1/scaler.scale_
-
+    
+    # Get the actual values
+    y = data_test_scale[100:, 0]
+    
+    # Scale back to original values
+    scale = 1/scaler.scale_[0]
     predict = predict * scale
     y = y * scale
-
+    
     st.subheader(f'{company_full_name} - Original Price vs Predicted Price')
     fig4 = plt.figure(figsize=(8,6))
     plt.plot(predict, 'r', label='Predicted Price')
